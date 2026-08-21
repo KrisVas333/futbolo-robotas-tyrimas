@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Futbolo robotas vaikams 5–12 — rinkos tyrimas</title>
+<meta name="description" content="Nepriklausomas rinkos tyrimas: ar yra verslas robote, kuris treniruoja 5–12 m. vaikus futbolo. Konkurentai, Kinija, mokslas, kaštai, verdiktas.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="mast">
+    <p class="kicker">Rinkos tyrimas · 2026-08-21</p>
+    <h1>Futbolo robotas vaikams 5–12 m.</h1>
+    <p class="sub">Ar yra verslas robote, kuris moko vaikus futbolo? Kas rinkoje, kas lyderis, ką sako mokslas, kiek kainuoja pradėti Europoje — ir blaivus verdiktas.</p>
+    <p class="meta">Kam: <b>Domas · Augustas · Mindaugas</b> (FA „Herojai") &nbsp;·&nbsp; Nuo: <b>Kris Vasiliauskas</b> &nbsp;·&nbsp; <b>7</b> lygiagretūs tyrimo srautai</p>
+  </header>
+
+  <div id="content">
+    <p class="meta" id="loading">Kraunama ataskaita…</p>
+  </div>
+
+  <footer>
+    Parengė Kris Vasiliauskas · 2026-08-21 · Tyrimas atliktas daugiaagente AI sistema.
+    <br><a href="report.md">Žiūrėti šaltinį (Markdown)</a>
+  </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script>
+(function(){
+  var target = document.getElementById('content');
+
+  function fail(){
+    target.innerHTML = '<div class="box warn"><p class="kicker">Nepavyko įkelti</p>' +
+      '<p>Ataskaitos nepavyko atvaizduoti šioje svetainėje. Pilną tekstą rasite čia: ' +
+      '<a href="report.md">report.md</a>.</p></div>';
+  }
+
+  fetch('report.md', {cache:'no-cache'})
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
+    .then(function(md){
+      if(typeof marked === 'undefined') return fail();
+
+      // Drop the duplicated title block — the page masthead already carries it.
+      var start = md.indexOf('## ⚡');
+      if(start > -1) md = md.slice(start);
+
+      marked.setOptions({gfm:true, breaks:false, headerIds:true, mangle:false});
+      target.innerHTML = marked.parse(md);
+
+      // Tables need their own horizontal scroll container so the page never scrolls sideways.
+      target.querySelectorAll('table').forEach(function(t){
+        var w = document.createElement('div');
+        w.className = 'tablewrap';
+        t.parentNode.insertBefore(w, t);
+        w.appendChild(t);
+      });
+
+      // The 30-second verdict reads as the page's lede.
+      var firstH2 = target.querySelector('h2');
+      if(firstH2) firstH2.classList.add('lede');
+    })
+    .catch(fail);
+})();
+</script>
+
+</body>
+</html>
