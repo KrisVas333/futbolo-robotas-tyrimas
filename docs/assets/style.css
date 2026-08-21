@@ -1,0 +1,160 @@
+/* Kris brand canon — LIGHT mode (public-facing). Source: wiki/meta/brand-style.md */
+:root{
+  --ground:#FFFFFF;
+  --surface:#F7F7F5;
+  --ink:#0A0A0A;
+  --muted:#595959;
+  --line:#E5E2DE;
+  --accent:#D90429;   /* red for text/buttons on white */
+  --red:#FF0000;      /* micro-accents only */
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --body:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --r:4px;
+  --maxw:920px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#080808; --surface:#0D0D0D; --ink:#FAFAFA; --muted:#9A9A9A;
+    --line:#262626; --accent:#FF3B3B; --red:#FF0000;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#080808; --surface:#0D0D0D; --ink:#FAFAFA; --muted:#9A9A9A;
+  --line:#262626; --accent:#FF3B3B; --red:#FF0000;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--body); font-size:17px; line-height:1.65;
+  letter-spacing:.005em;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 120px}
+
+/* ---- masthead ---- */
+header.mast{
+  border-bottom:3px solid var(--ink);
+  padding:56px 0 26px; margin-bottom:38px;
+}
+.kicker{
+  font-family:var(--mono); font-size:12px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.16em; color:var(--accent);
+  margin:0 0 14px;
+}
+h1{
+  font-family:var(--mono); font-weight:800; letter-spacing:-.01em;
+  font-size:clamp(30px,5.2vw,46px); line-height:1.12; margin:0 0 16px;
+}
+.sub{font-size:19px; color:var(--muted); margin:0 0 18px; max-width:62ch}
+.meta{
+  font-family:var(--mono); font-size:12px; text-transform:uppercase;
+  letter-spacing:.1em; color:var(--muted);
+}
+.meta b{color:var(--ink); font-weight:700}
+
+/* ---- headings ---- */
+h2{
+  font-family:var(--mono); font-weight:800; text-transform:uppercase;
+  letter-spacing:.06em; font-size:clamp(20px,3vw,26px); line-height:1.25;
+  margin:64px 0 6px; padding-top:26px; border-top:1px solid var(--line);
+}
+h2:first-of-type{border-top:none}
+h3{
+  font-family:var(--mono); font-weight:700; font-size:18px;
+  letter-spacing:.02em; margin:38px 0 8px;
+}
+h4{font-family:var(--mono); font-weight:700; font-size:15px; letter-spacing:.04em;
+   text-transform:uppercase; color:var(--muted); margin:26px 0 6px}
+p{margin:0 0 16px; max-width:74ch}
+ul,ol{margin:0 0 18px; padding-left:22px; max-width:74ch}
+li{margin:0 0 8px}
+a{color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(217,4,41,.32)}
+a:hover{border-bottom-color:var(--accent)}
+strong{font-weight:700}
+hr{border:none; border-top:1px solid var(--line); margin:44px 0}
+small{font-size:13px; color:var(--muted)}
+
+/* ---- verdict block ---- */
+.verdict{
+  background:var(--ink); color:var(--ground);
+  border-radius:var(--r); padding:30px 30px 26px; margin:34px 0 40px;
+}
+.verdict .kicker{color:var(--red)}
+.verdict h3{margin-top:0; color:var(--ground); font-size:23px; text-transform:none}
+.verdict p{color:var(--ground); opacity:.92}
+.verdict a{color:#FF6B6B; border-bottom-color:rgba(255,107,107,.4)}
+
+/* ---- callouts ---- */
+.box{
+  background:var(--surface); border:1px solid var(--line);
+  border-left:4px solid var(--accent);
+  border-radius:var(--r); padding:20px 22px; margin:26px 0;
+}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.box .kicker{margin-bottom:8px}
+.box.warn{border-left-color:#B26B00}
+.box.warn .kicker{color:#B26B00}
+.box.good{border-left-color:#1B7F4B}
+.box.good .kicker{color:#1B7F4B}
+
+/* ---- scorecard ---- */
+.scores{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin:28px 0}
+.score{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r); padding:16px 16px 14px;
+}
+.score .lbl{font-family:var(--mono); font-size:11px; text-transform:uppercase;
+  letter-spacing:.12em; color:var(--muted); display:block; margin-bottom:6px}
+.score .num{font-family:var(--mono); font-size:30px; font-weight:800; line-height:1; color:var(--accent)}
+.score .num span{font-size:15px; color:var(--muted); font-weight:600}
+.score .note{font-size:13px; color:var(--muted); margin-top:6px; line-height:1.45}
+
+/* ---- tables ---- */
+.tablewrap{overflow-x:auto; margin:24px 0; border:1px solid var(--line); border-radius:var(--r)}
+table{border-collapse:collapse; width:100%; font-size:14.5px; min-width:560px}
+th,td{padding:11px 14px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+th{
+  font-family:var(--mono); font-size:11px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.1em; color:var(--muted); background:var(--surface); white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--surface)}
+td code{font-family:var(--mono); font-size:13px}
+
+/* ---- steps ---- */
+ol.steps{list-style:none; padding:0; counter-reset:s; max-width:none}
+ol.steps>li{
+  counter-increment:s; position:relative; padding:0 0 22px 54px; margin:0;
+  border-left:1px solid var(--line); margin-left:16px;
+}
+ol.steps>li:last-child{border-left-color:transparent}
+ol.steps>li::before{
+  content:counter(s); position:absolute; left:-16px; top:-2px;
+  width:32px; height:32px; border-radius:var(--r);
+  background:var(--accent); color:#fff;
+  font-family:var(--mono); font-weight:800; font-size:14px;
+  display:flex; align-items:center; justify-content:center;
+}
+ol.steps>li h3{margin:2px 0 6px}
+
+/* ---- toc ---- */
+nav.toc{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r); padding:20px 24px; margin:0 0 44px;
+}
+nav.toc .kicker{margin-bottom:10px}
+nav.toc ol{columns:2; column-gap:32px; margin:0; padding-left:20px; font-size:15px}
+@media(max-width:620px){nav.toc ol{columns:1}}
+
+footer{
+  border-top:3px solid var(--ink); margin-top:70px; padding-top:22px;
+  font-family:var(--mono); font-size:12px; text-transform:uppercase;
+  letter-spacing:.1em; color:var(--muted);
+}
+.tag{
+  display:inline-block; font-family:var(--mono); font-size:11px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.09em; padding:3px 8px; border-radius:var(--r);
+  background:var(--surface); border:1px solid var(--line); color:var(--muted); margin-right:6px;
+}
+.tag.hot{background:var(--accent); color:#fff; border-color:var(--accent)}
